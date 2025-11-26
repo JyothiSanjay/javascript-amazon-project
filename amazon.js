@@ -1,32 +1,3 @@
-const products = [
-    {
-        name: 'Black and Gray Athletic Cotton Socks - 6 Pairs',
-        image: "images/products/athletic-cotton-socks-6-pairs.jpg",
-        rating: {
-            stars: 4.5,
-            count: 87
-        },
-        price: 1090
-    },
-    {
-        name: 'Intermediate Size Basketball',
-        image: 'images/products/intermediate-composite-basketball.jpg',
-        rating: {
-            stars: 4.0,
-            count: 127
-        },
-        price: 2095
-    },
-    {
-        name: 'Adults Plain Cotton T-Shirt - 2 Pack',
-        image: 'images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg',
-        rating: {
-            stars: 4.5,
-            count: 56
-        },
-        price: 799
-    }
-];
 
 let productsHTML = '';
 
@@ -76,12 +47,25 @@ products.forEach(product => {
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">
+          <button class="add-to-cart-button button-primary"
+          data-product-id="${product.id}">
             Add to Cart
           </button>
         </div>
     `;
-    console.log(productsHTML);
-    document.querySelector('.products-grid').innerHTML = productsHTML;
+})
+document.querySelector('.products-grid').innerHTML = productsHTML;
+document.querySelectorAll('.add-to-cart-button').forEach((button, index) => {
+    button.addEventListener('click', () => {
+        const productId = button.dataset.productId;
+        let itemFound = cart.find(item => item.productId === productId);
+        if (itemFound) {
+            itemFound.qty += 1;
+        } else
+        cart.push({productId:productId, qty: 1});
+        
+        console.log(cart);
+        
+    })
 })
 
