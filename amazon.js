@@ -1,5 +1,6 @@
 
 let productsHTML = '';
+let cartQuantity = 0;
 
 products.forEach(product => {
     productsHTML += `
@@ -64,7 +65,7 @@ document.querySelectorAll('.add-to-cart-button').forEach((button, index) => {
         } else
         cart.push({productId:productId, qty: 1});
         
-        console.log(cart);
+        document.querySelector('.cart-quantity').innerHTML = cart.reduce((sum, item) => sum + item.qty, 0);
         
     })
 })
